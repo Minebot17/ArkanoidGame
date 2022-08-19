@@ -19,7 +19,6 @@ namespace ArkanoidView.EntityViews
         private void Awake()
         {
             _controls.Game.Move.started += HandleMoveAction;
-            _controls.Game.Move.performed += HandleMoveAction;
             _controls.Game.Move.canceled += HandleMoveAction;
         }
 
@@ -32,13 +31,11 @@ namespace ArkanoidView.EntityViews
         private void OnDestroy()
         {
             _controls.Game.Move.started -= HandleMoveAction;
-            _controls.Game.Move.performed -= HandleMoveAction;
             _controls.Game.Move.canceled -= HandleMoveAction;
         }
 
-        private void HandleMoveAction(InputAction.CallbackContext context)
+        public void HandleMoveAction(InputAction.CallbackContext context)
         {
-            Debug.LogError("a");
             var direction = context.ReadValue<float>();
             var movingState = direction < 0 ? PlayerEntity.MovingState.MoveLeft 
                 : direction > 0 ? PlayerEntity.MovingState.MoveRight 

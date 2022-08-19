@@ -16,7 +16,9 @@ namespace ArkanoidView
         
         public override void InstallBindings()
         {
-            Container.BindInstance(new ArkanoidControls()).AsSingle();
+            var controls = new ArkanoidControls();
+            controls.Game.Enable();
+            Container.BindInstance(controls).AsSingle();
             Container.Bind<IEntityViewSpawner>().FromInstance(ConstructEntitySpawner()).AsSingle();
             Container.Bind<IGameModel>().FromInstance(new GameModel()).AsSingle();
         }

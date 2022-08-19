@@ -19,7 +19,7 @@ namespace ArkanoidModel.Core
             EntityManager = new EntityManager();
             ScoreManager = new ScoreManager(EntityManager);
             _mapSizeManager = new MapSizeManager(new Vector2(10, 10));
-            _player = new PlayerEntity(_mapSizeManager, new Vector2(2f, 0.2f), 0.5f, 1f);
+            _player = new PlayerEntity(_mapSizeManager, new Vector2(2f, 0.2f), 0.5f, 0.2f);
         }
 
         public void StartGame()
