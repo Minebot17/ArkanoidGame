@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ArkanoidModel.Entities;
 using UnityEngine;
 using ArkanoidView.EntityViews;
-using Object = UnityEngine.Object;
+using Zenject;
 
 namespace ArkanoidView.Utils
 {
@@ -12,6 +12,12 @@ namespace ArkanoidView.Utils
         public event Action<IEntityView> OnEntityViewSpawned;
         
         private readonly Dictionary<Type, GameObject> _entityPrefabs = new();
+        private readonly DiContainer _container;
+        
+        public EntityViewSpawner(DiContainer container)
+        {
+            _container = container;
+        }
 
         public void RegisterEntityPrefab(Type entityType, GameObject prefab)
         {
@@ -26,7 +32,7 @@ namespace ArkanoidView.Utils
                 return;
             }
             
-            var entityView = Object.Instantiate(_entityPrefabs[entity.GetType()]).GetComponent<IEntityView>();
+            var entityView = _container.InstantiatePrefab(_entityPrefabs[entity.GetType()]).GetComponent<IEntityView>();
             if (entityView == null)
             {
                 Debug.LogError("EntityView not found");

@@ -1,5 +1,6 @@
 ﻿using System;
 using ArkanoidModel.Core;
+using ArkanoidModel.Entities.Bounds;
 using UnityEngine;
 
 namespace ArkanoidModel.Entities
@@ -12,7 +13,5 @@ namespace ArkanoidModel.Entities
         Vector2 Position { get; set; }
 
         void Destroyed();
-        
-        void OnCollision(IEntity other);
     }
 }

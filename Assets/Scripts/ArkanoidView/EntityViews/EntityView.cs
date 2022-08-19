@@ -37,13 +37,5 @@ namespace ArkanoidView.EntityViews
         {
             _transformEntityMapper.MapTransformFromEntity();
         }
-        
-        private void OnTriggerEnter2D(Collider2D col) // TODO вынести колизию в модель
-        {
-            if (col.gameObject.TryGetComponent(out IEntityView entityView))
-            {
-                entityView.EntityModel.OnCollision(_entityModel);
-            }
-        }
     }
 }
