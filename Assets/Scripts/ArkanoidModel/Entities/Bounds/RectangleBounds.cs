@@ -13,10 +13,11 @@ namespace ArkanoidModel.Entities.Bounds
 
         public bool IsPointInside(Vector2 point)
         {
-            return point.x > -Size.x / 2f
-                   && point.y > -Size.y / 2f
-                   && point.x < Size.x / 2f
-                   && point.x < Size.y / 2f;
+            var halfSize = Size / 2f;
+            return point.x > -halfSize.x
+                   && point.y > -halfSize.y
+                   && point.x < halfSize.x
+                   && point.x < halfSize.y;
         }
     }
 }
