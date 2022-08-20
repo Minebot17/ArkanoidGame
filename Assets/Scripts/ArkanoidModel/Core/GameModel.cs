@@ -15,12 +15,14 @@ namespace ArkanoidModel.Core
         public IEntityManager EntityManager { get; }
         public IScoreManager ScoreManager { get; }
         public IMapSizeManager MapSizeManager { get; }
+        public ILevelStateManager LevelStateManager { get; }
 
         public GameModel()
         {
             EntityManager = new EntityManager();
             ScoreManager = new ScoreManager(EntityManager);
             MapSizeManager = new MapSizeManager(new Vector2(10, 10));
+            LevelStateManager = new LevelStateManager(MapSizeManager, EntityManager);
             _ball = new BallEntity(new Vector2(0.25f, 0.25f), 0.15f);
             _player = new PlayerEntity(MapSizeManager, _ball, new Vector2(2f, 0.2f), 0.5f, 0.2f);
             _bricksSpawner = new BricksSpawner(EntityManager, MapSizeManager, 2,
@@ -36,6 +38,7 @@ namespace ArkanoidModel.Core
             EntityManager.SpawnEntity(_player);
 
             _updatables.Add(EntityManager);
+            _updatables.Add(LevelStateManager);
         }
         
         public void TickUpdate()

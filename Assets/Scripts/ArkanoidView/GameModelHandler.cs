@@ -59,6 +59,8 @@ namespace ArkanoidView
         private void Awake()
         {
             _gameModel.EntityManager.OnEntitySpawned += OnEntitySpawned;
+            _gameModel.LevelStateManager.OnWinLevel += OnWinLevel;
+            _gameModel.LevelStateManager.OnLoseLevel += OnLoseLevel;
             _controls.Game.Pause.performed += HandlePauseAction;
             _controls.UI.Pause.performed += HandlePauseAction;
             
@@ -82,7 +84,30 @@ namespace ArkanoidView
 
         private void HandlePauseAction(InputAction.CallbackContext context)
         {
+            if (_gameModel.LevelStateManager.IsLevelEnded)
+            {
+                return;
+            }
+            
             IsPause = !IsPause;
+        }
+
+        private void OnWinLevel()
+        {
+            OnEndLevel(GameMenuView.MenuMode.Win);
+        }
+        
+        private void OnLoseLevel()
+        {
+            OnEndLevel(GameMenuView.MenuMode.Lose);
+        }
+        
+        private void OnEndLevel(GameMenuView.MenuMode menuMode)
+        {
+            _controls.UI.Enable();
+            _controls.Game.Disable();
+            _gameMenuView.Show(menuMode);
+            _isPause = true;
         }
     }
 }

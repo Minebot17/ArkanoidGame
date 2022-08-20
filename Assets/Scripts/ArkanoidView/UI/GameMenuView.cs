@@ -46,7 +46,7 @@ namespace ArkanoidView.UI
                     _restartButton.gameObject.SetActive(true);
                     break;
                 case MenuMode.Lose:
-                    _titleText.text = "Win";
+                    _titleText.text = "Lose";
                     _continueButton.gameObject.SetActive(false);
                     _restartButton.gameObject.SetActive(true);
                     break;
