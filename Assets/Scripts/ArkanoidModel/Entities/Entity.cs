@@ -10,6 +10,7 @@ namespace ArkanoidModel.Entities
         public event Action OnDestroyed;
         
         public Vector2 Position { get; set; }
+        public virtual bool IsPhysicsDynamicEntity => false;
         public abstract IBounds Bounds { get; }
 
         protected virtual void Destroy()

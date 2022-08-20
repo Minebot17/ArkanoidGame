@@ -12,6 +12,7 @@ namespace ArkanoidModel.Entities
         
         Vector2 Position { get; set; }
         IBounds Bounds { get; }
+        bool IsPhysicsDynamicEntity { get; }
 
         void Destroyed();
     }

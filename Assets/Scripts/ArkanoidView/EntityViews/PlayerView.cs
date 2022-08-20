@@ -1,5 +1,4 @@
-﻿using System;
-using ArkanoidModel.Entities;
+﻿using ArkanoidModel.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -20,6 +19,14 @@ namespace ArkanoidView.EntityViews
         {
             _controls.Game.Move.started += HandleMoveAction;
             _controls.Game.Move.canceled += HandleMoveAction;
+            _controls.Game.Fire.performed += HandleFireAction;
+        }
+        
+        private void OnDestroy()
+        {
+            _controls.Game.Move.started -= HandleMoveAction;
+            _controls.Game.Move.canceled -= HandleMoveAction;
+            _controls.Game.Fire.performed -= HandleFireAction;
         }
 
         protected override void Start()
@@ -28,13 +35,7 @@ namespace ArkanoidView.EntityViews
             transform.localScale = new Vector3(Entity.RectangleBounds.Size.x, Entity.RectangleBounds.Size.y, 1);
         }
 
-        private void OnDestroy()
-        {
-            _controls.Game.Move.started -= HandleMoveAction;
-            _controls.Game.Move.canceled -= HandleMoveAction;
-        }
-
-        public void HandleMoveAction(InputAction.CallbackContext context)
+        private void HandleMoveAction(InputAction.CallbackContext context)
         {
             var direction = context.ReadValue<float>();
             var movingState = direction < 0 ? PlayerEntity.MovingState.MoveLeft 
@@ -42,6 +43,11 @@ namespace ArkanoidView.EntityViews
                 : PlayerEntity.MovingState.Stay;
             
             Entity.SetMovingState(movingState);
+        }
+
+        private void HandleFireAction(InputAction.CallbackContext context)
+        {
+            Entity.TryFire();
         }
     }
 }
