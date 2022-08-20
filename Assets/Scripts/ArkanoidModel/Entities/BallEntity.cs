@@ -32,6 +32,11 @@ namespace ArkanoidModel.Entities
             else
             {
                 VelocityDirection = Vector2.Reflect(VelocityDirection, collisionNormal);
+
+                if (entity is BrickEntity brick)
+                {
+                    brick.OnCollideWithBall();
+                }
             }
         }
     }

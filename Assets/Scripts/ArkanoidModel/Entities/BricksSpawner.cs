@@ -41,7 +41,7 @@ namespace ArkanoidModel.Entities
             {
                 for (var x = 0; x < bricksCount; x++)
                 {
-                    var brick = new BrickEntity(_bricksSize)
+                    var brick = new BrickEntity(_bricksSize, 1)
                     {
                         Position = globalOffset 
                                    + new Vector2(_bricksOffset.x * x, -_bricksOffset.y * y)

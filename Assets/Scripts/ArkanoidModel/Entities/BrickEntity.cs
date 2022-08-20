@@ -1,17 +1,26 @@
-﻿using UnityEngine;
+﻿using ArkanoidModel.Core;
+using UnityEngine;
 
 namespace ArkanoidModel.Entities
 {
-    public class BrickEntity : Entity
+    public class BrickEntity : Entity, IScoreSource
     {
-        public BrickEntity(Vector2 size)
+        public int Score { get; }
+        
+        public BrickEntity(Vector2 size, int score)
         {
             Size = size;
+            Score = score;
         }
         
         public override void TickUpdate()
         {
             
+        }
+
+        public void OnCollideWithBall()
+        {
+            Destroy();
         }
     }
 }

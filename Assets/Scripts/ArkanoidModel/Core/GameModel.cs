@@ -21,11 +21,11 @@ namespace ArkanoidModel.Core
             EntityManager = new EntityManager();
             ScoreManager = new ScoreManager(EntityManager);
             MapSizeManager = new MapSizeManager(new Vector2(10, 10));
-            _ball = new BallEntity(new Vector2(0.25f, 0.25f), 0.1f);
+            _ball = new BallEntity(new Vector2(0.25f, 0.25f), 0.15f);
             _player = new PlayerEntity(MapSizeManager, _ball, new Vector2(2f, 0.2f), 0.5f, 0.2f);
-            _bricksSpawner = new BricksSpawner(EntityManager, MapSizeManager, 3,
+            _bricksSpawner = new BricksSpawner(EntityManager, MapSizeManager, 2,
                 new Vector2(0.5f, 0.5f), 
-                new Vector2(1.25f, 0.75f),
+                new Vector2(1.1f, 0.6f),
                 new Vector2(1f, 0.5f));
         }
 

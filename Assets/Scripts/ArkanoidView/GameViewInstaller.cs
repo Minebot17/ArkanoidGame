@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ArkanoidModel.Core;
 using ArkanoidModel.Entities;
 using ArkanoidModel.Map;
+using ArkanoidView.UI;
 using ArkanoidView.Utils;
 using UnityEngine;
 using Zenject;
@@ -15,6 +16,8 @@ namespace ArkanoidView
         [SerializeField] private GameObject _brickPrefab;
         [SerializeField] private GameObject _ballPrefab;
         [SerializeField] private MapBordersView _mapBorderView;
+        [SerializeField] private GameMenuView _gameMenuView;
+        [SerializeField] private GameModelHandler _gameModelHandler;
         
         public override void InstallBindings()
         {
@@ -26,7 +29,10 @@ namespace ArkanoidView
             Container.Bind<IEntityViewSpawner>().FromInstance(ConstructEntitySpawner()).AsSingle();
             Container.Bind<IGameModel>().FromInstance(gameModel).AsSingle();
             Container.Bind<MapBordersView>().FromInstance(_mapBorderView).AsSingle();
+            Container.Bind<GameMenuView>().FromInstance(_gameMenuView).AsSingle();
+            Container.Bind<GameModelHandler>().FromInstance(_gameModelHandler).AsSingle();
             Container.Bind<IMapSizeManager>().FromInstance(gameModel.MapSizeManager).AsSingle();
+            Container.Bind<IScoreManager>().FromInstance(gameModel.ScoreManager).AsSingle();
         }
         
         private IEntityViewSpawner ConstructEntitySpawner()
