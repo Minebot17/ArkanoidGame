@@ -34,6 +34,7 @@ namespace ArkanoidView
             var entityWithPrefabs = new HashSet<(Type Type, GameObject Prefab)>
             {
                 (typeof(PlayerEntity), _playerPrefab),
+                (typeof(BrickEntity), _brickPrefab)
             };
             
             var entitySpawner = new EntityViewSpawner(Container);

@@ -25,7 +25,7 @@ namespace ArkanoidView.EntityViews
         protected override void Start()
         {
             base.Start();
-            transform.localScale = new Vector3(Entity.Bounds.Size.x, Entity.Bounds.Size.y, 1);
+            transform.localScale = new Vector3(Entity.RectangleBounds.Size.x, Entity.RectangleBounds.Size.y, 1);
         }
 
         private void OnDestroy()

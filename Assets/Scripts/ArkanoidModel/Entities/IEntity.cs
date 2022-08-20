@@ -11,6 +11,7 @@ namespace ArkanoidModel.Entities
         event Action OnDestroyed;
         
         Vector2 Position { get; set; }
+        IBounds Bounds { get; }
 
         void Destroyed();
     }
