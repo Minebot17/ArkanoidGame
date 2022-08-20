@@ -1,5 +1,4 @@
-﻿using ArkanoidModel.Entities.Bounds;
-using ArkanoidModel.Map;
+﻿using ArkanoidModel.Map;
 using ArkanoidModel.Utils;
 using UnityEngine;
 
@@ -14,13 +13,10 @@ namespace ArkanoidModel.Entities
         private MovingState _currentMovingState;
         private bool _ballGripped;
 
-        public RectangleBounds RectangleBounds { get; }
-        public override IBounds Bounds => RectangleBounds;
-
         public PlayerEntity(
             IMapSizeManager mapSizeManager, 
             BallEntity ball, 
-            Vector2 platformSize, 
+            Vector2 size, 
             float platformOffset, 
             float movingSpeed)
         {
@@ -28,7 +24,7 @@ namespace ArkanoidModel.Entities
             _ball = ball;
             _movingSpeed = movingSpeed;
 
-            RectangleBounds = new RectangleBounds(platformSize);
+            Size = size;
             Position = new Vector2(0, platformOffset - mapSizeManager.MapSize.y / 2f);
             _ballGripped = true;
         }
@@ -40,8 +36,8 @@ namespace ArkanoidModel.Entities
                 var xDirection = _currentMovingState == MovingState.MoveLeft ? -1 : 1;
                 var newPosition = Position + new Vector2(_movingSpeed * xDirection, 0);
                 
-                if (newPosition.x - RectangleBounds.Size.x / 2f > -_mapSizeManager.MapSize.x / 2f
-                    && newPosition.x + RectangleBounds.Size.x / 2f < _mapSizeManager.MapSize.x / 2f)
+                if (newPosition.x - Size.x / 2f > -_mapSizeManager.MapSize.x / 2f
+                    && newPosition.x + Size.x / 2f < _mapSizeManager.MapSize.x / 2f)
                 {
                     Position = newPosition;
                 }
@@ -50,7 +46,7 @@ namespace ArkanoidModel.Entities
             if (_ballGripped)
             {
                 _ball.Position = Position 
-                                 + new Vector2(0, RectangleBounds.Size.y / 2f + _ball.CircleBounds.Radius / 2f);
+                                 + new Vector2(0, Size.y / 2f + _ball.Size.y / 2f);
             }
         }
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ArkanoidModel.Entities;
-using ArkanoidModel.Entities.Bounds;
 using ArkanoidModel.Map;
 using UnityEngine;
 
@@ -22,12 +21,12 @@ namespace ArkanoidModel.Core
             EntityManager = new EntityManager();
             ScoreManager = new ScoreManager(EntityManager);
             MapSizeManager = new MapSizeManager(new Vector2(10, 10));
-            _ball = new BallEntity(new CircleBounds(0.25f), 0.1f);
+            _ball = new BallEntity(new Vector2(0.25f, 0.25f), 0.1f);
             _player = new PlayerEntity(MapSizeManager, _ball, new Vector2(2f, 0.2f), 0.5f, 0.2f);
             _bricksSpawner = new BricksSpawner(EntityManager, MapSizeManager, 3,
                 new Vector2(0.5f, 0.5f), 
                 new Vector2(1.25f, 0.75f),
-                new RectangleBounds(new Vector2(1f, 0.5f)));
+                new Vector2(1f, 0.5f));
         }
 
         public void StartGame()

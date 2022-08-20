@@ -8,7 +8,13 @@ namespace ArkanoidView.EntityViews
         protected override void Start()
         {
             base.Start();
-            transform.localScale = new Vector3(Entity.CircleBounds.Radius, Entity.CircleBounds.Radius, 1);
+            transform.localScale = new Vector3(Entity.Size.x, Entity.Size.x, 1);
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            col.collider.TryGetComponent(out IEntityView entityView);
+            Entity.OnCollision(col.GetContact(0).normal, entityView?.EntityModel);
         }
     }
 }

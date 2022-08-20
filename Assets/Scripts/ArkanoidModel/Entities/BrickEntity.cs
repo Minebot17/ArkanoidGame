@@ -1,15 +1,12 @@
-﻿using ArkanoidModel.Entities.Bounds;
+﻿using UnityEngine;
 
 namespace ArkanoidModel.Entities
 {
     public class BrickEntity : Entity
     {
-        public RectangleBounds RectangleBounds { get; }
-        public override IBounds Bounds => RectangleBounds;
-        
-        public BrickEntity(RectangleBounds rectangleBounds)
+        public BrickEntity(Vector2 size)
         {
-            RectangleBounds = rectangleBounds;
+            Size = size;
         }
         
         public override void TickUpdate()

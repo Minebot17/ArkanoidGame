@@ -1,5 +1,4 @@
 ﻿using System;
-using ArkanoidModel.Entities.Bounds;
 using UnityEngine;
 
 namespace ArkanoidModel.Entities
@@ -10,8 +9,7 @@ namespace ArkanoidModel.Entities
         public event Action OnDestroyed;
         
         public Vector2 Position { get; set; }
-        public virtual bool IsPhysicsDynamicEntity => false;
-        public abstract IBounds Bounds { get; }
+        public Vector2 Size { get; protected set; }
 
         protected virtual void Destroy()
         {

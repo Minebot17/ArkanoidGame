@@ -8,7 +8,7 @@ namespace ArkanoidView.EntityViews
         protected override void Start()
         {
             base.Start();
-            transform.localScale = new Vector3(Entity.RectangleBounds.Size.x, Entity.RectangleBounds.Size.y, 1);
+            transform.localScale = new Vector3(Entity.Size.x, Entity.Size.y, 1);
         }
     }
 }
