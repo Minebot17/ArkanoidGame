@@ -4,9 +4,12 @@ using ArkanoidView.Utils;
 
 namespace ArkanoidView.EntityViews
 {
-    public class EntityView<T> : MonoBehaviour, IEntityView where T : IEntity
+    public class EntityView<T> : MonoBehaviour, IEntityView
+        where T : IEntity
     {
         private IEntity _entityModel;
+        private ITransformEntityMapper _transformEntityMapper;
+        
         public IEntity EntityModel
         {
             get => _entityModel;
@@ -24,7 +27,6 @@ namespace ArkanoidView.EntityViews
         }
 
         public T Entity { get; private set; }
-        private ITransformEntityMapper _transformEntityMapper;
 
         protected virtual void Start()
         {
@@ -33,7 +35,7 @@ namespace ArkanoidView.EntityViews
             transform.position = EntityModel.Position;
         }
 
-        protected virtual void Update()
+        protected void Update()
         {
             _transformEntityMapper.MapTransformFromEntity();
         }

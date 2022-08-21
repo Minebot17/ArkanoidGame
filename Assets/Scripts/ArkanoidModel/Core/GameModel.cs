@@ -2,16 +2,15 @@
 using ArkanoidModel.Entities;
 using ArkanoidModel.Map;
 using ArkanoidModel.Utils;
+using Zenject;
 
 namespace ArkanoidModel.Core
 {
     public class GameModel : IGameModel
     {
         private readonly List<IUpdatable> _updatables = new();
-        private readonly IEntity _player;
-        private readonly IBricksSpawner _bricksSpawner;
-        private readonly BallEntity _ball;
-        
+        private readonly DiContainer _container;
+
         public IEntityManager EntityManager { get; }
         public IScoreManager ScoreManager { get; }
         public IMapSizeManager MapSizeManager { get; }
@@ -19,22 +18,19 @@ namespace ArkanoidModel.Core
 
         public GameModel(IGameSettings settings)
         {
-            EntityManager = new EntityManager();
-            ScoreManager = new ScoreManager(EntityManager);
-            MapSizeManager = new MapSizeManager(settings.MapSize);
-            LevelStateManager = new LevelStateManager(MapSizeManager, EntityManager);
-            _ball = new BallEntity(settings.BallSize, settings.BallMoveSpeed, settings.MaxDegreesBallBoundingFromPlayer);
-            _player = new PlayerEntity(MapSizeManager, _ball, 
-                settings.PlayerSize, settings.PlayerYOffset, settings.PlayerMoveSpeed, settings.MaxDegreesBallStartFire);
-            _bricksSpawner = new BricksSpawner(EntityManager, MapSizeManager, settings.BrickRowsToSpawn,
-                settings.BricksSpawnOffset, settings.BricksOffset, settings.BricksSize, settings.BricksScore);
+            _container = new ModelContainerConstructor(settings).Container;
+            
+            EntityManager = _container.Resolve<IEntityManager>();
+            ScoreManager = _container.Resolve<IScoreManager>();
+            MapSizeManager = _container.Resolve<IMapSizeManager>();
+            LevelStateManager = _container.Resolve<ILevelStateManager>();
         }
 
         public void StartGame()
         {
-            _bricksSpawner.SpawnBricks();
-            EntityManager.SpawnEntity(_ball);
-            EntityManager.SpawnEntity(_player);
+            _container.Resolve<IBricksSpawner>().SpawnBricks();
+            EntityManager.SpawnEntity(_container.Resolve<BallEntity>());
+            EntityManager.SpawnEntity(_container.Resolve<PlayerEntity>());
 
             _updatables.Add(EntityManager);
             _updatables.Add(LevelStateManager);

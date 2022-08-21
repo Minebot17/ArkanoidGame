@@ -28,7 +28,7 @@ namespace ArkanoidView
 
         public override void InstallBindings()
         {
-            var gameModel = new GameModel(_gameSettings);
+            var gameModel = (IGameModel) new GameModel(_gameSettings);
             var controls = new ArkanoidControls();
             controls.Game.Enable();
             

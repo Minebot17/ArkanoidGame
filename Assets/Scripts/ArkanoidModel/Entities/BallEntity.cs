@@ -23,7 +23,7 @@ namespace ArkanoidModel.Entities
             Position += VelocityDirection * _moveSpeed;
         }
 
-        public void OnCollision(Vector2 collisionNormal, IEntity entity)
+        public void OnCollision(Vector2[] collisionsNormals, IEntity entity)
         {
             if (entity is PlayerEntity player)
             {
@@ -34,8 +34,11 @@ namespace ArkanoidModel.Entities
             }
             else
             {
-                VelocityDirection = Vector2.Reflect(VelocityDirection, collisionNormal);
-
+                foreach (var normal in collisionsNormals)
+                {
+                    VelocityDirection = Vector2.Reflect(VelocityDirection, normal);
+                }
+                
                 if (entity is BrickEntity brick)
                 {
                     brick.OnCollideWithBall();
