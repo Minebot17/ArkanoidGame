@@ -500,6 +500,7 @@ MonoBehaviour:
   _mapBorderView: {fileID: 288286976}
   _gameMenuView: {fileID: 406074393}
   _gameModelHandler: {fileID: 436911178}
+  _gameSettings: {fileID: 11400000, guid: a5fdf3d5d124e5a43baa648264f15adb, type: 2}
 --- !u!114 &436911177
 MonoBehaviour:
   m_ObjectHideFlags: 0

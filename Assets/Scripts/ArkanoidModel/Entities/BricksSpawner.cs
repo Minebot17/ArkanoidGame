@@ -12,6 +12,7 @@ namespace ArkanoidModel.Entities
         private readonly Vector2 _spawnOffset;
         private readonly Vector2 _bricksOffset;
         private readonly Vector2 _bricksSize;
+        private readonly int _bricksScore;
 
         public BricksSpawner(
             IEntityManager entityManager, 
@@ -19,7 +20,8 @@ namespace ArkanoidModel.Entities
             int rowsToSpawn,
             Vector2 spawnOffset, 
             Vector2 bricksOffset,
-            Vector2 bricksSize)
+            Vector2 bricksSize,
+            int bricksScore)
         {
             _entityManager = entityManager;
             _mapSizeManager = mapSizeManager;
@@ -27,6 +29,7 @@ namespace ArkanoidModel.Entities
             _spawnOffset = spawnOffset;
             _bricksOffset = bricksOffset;
             _bricksSize = bricksSize;
+            _bricksScore = bricksScore;
         }
         
         public void SpawnBricks()
@@ -41,7 +44,7 @@ namespace ArkanoidModel.Entities
             {
                 for (var x = 0; x < bricksCount; x++)
                 {
-                    var brick = new BrickEntity(_bricksSize, 1)
+                    var brick = new BrickEntity(_bricksSize, _bricksScore)
                     {
                         Position = globalOffset 
                                    + new Vector2(_bricksOffset.x * x, -_bricksOffset.y * y)

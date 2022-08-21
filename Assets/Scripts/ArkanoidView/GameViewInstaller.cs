@@ -18,10 +18,17 @@ namespace ArkanoidView
         [SerializeField] private MapBordersView _mapBorderView;
         [SerializeField] private GameMenuView _gameMenuView;
         [SerializeField] private GameModelHandler _gameModelHandler;
-        
+        [SerializeField] private GameSettings _gameSettings;
+
+        public GameSettings GameSettings
+        {
+            get => _gameSettings;
+            set => _gameSettings = value;
+        }
+
         public override void InstallBindings()
         {
-            var gameModel = new GameModel();
+            var gameModel = new GameModel(_gameSettings);
             var controls = new ArkanoidControls();
             controls.Game.Enable();
             

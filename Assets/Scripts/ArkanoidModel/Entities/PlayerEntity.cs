@@ -9,6 +9,7 @@ namespace ArkanoidModel.Entities
         private readonly IMapSizeManager _mapSizeManager;
         private readonly float _movingSpeed;
         private readonly BallEntity _ball;
+        private readonly float _maxDegreesBallStartFire;
         
         private MovingState _currentMovingState;
         private bool _ballGripped;
@@ -18,11 +19,13 @@ namespace ArkanoidModel.Entities
             BallEntity ball, 
             Vector2 size, 
             float platformOffset, 
-            float movingSpeed)
+            float movingSpeed,
+            float maxDegreesBallStartFire)
         {
             _mapSizeManager = mapSizeManager;
             _ball = ball;
             _movingSpeed = movingSpeed;
+            _maxDegreesBallStartFire = maxDegreesBallStartFire;
 
             Size = size;
             Position = new Vector2(0, platformOffset - mapSizeManager.MapSize.y / 2f);
@@ -57,7 +60,8 @@ namespace ArkanoidModel.Entities
                 return;
             }
 
-            _ball.VelocityDirection = Vector2.up.Rotate(Random.Range(-20, 20)); // TODO degree to settings
+            _ball.VelocityDirection = Vector2.up
+                .Rotate(Random.Range(-_maxDegreesBallStartFire, _maxDegreesBallStartFire));
             _ballGripped = false;
         }
         

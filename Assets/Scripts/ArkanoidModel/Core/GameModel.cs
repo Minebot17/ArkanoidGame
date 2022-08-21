@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ArkanoidModel.Entities;
 using ArkanoidModel.Map;
-using UnityEngine;
+using ArkanoidModel.Utils;
 
 namespace ArkanoidModel.Core
 {
@@ -17,18 +17,17 @@ namespace ArkanoidModel.Core
         public IMapSizeManager MapSizeManager { get; }
         public ILevelStateManager LevelStateManager { get; }
 
-        public GameModel()
+        public GameModel(IGameSettings settings)
         {
             EntityManager = new EntityManager();
             ScoreManager = new ScoreManager(EntityManager);
-            MapSizeManager = new MapSizeManager(new Vector2(10, 10));
+            MapSizeManager = new MapSizeManager(settings.MapSize);
             LevelStateManager = new LevelStateManager(MapSizeManager, EntityManager);
-            _ball = new BallEntity(new Vector2(0.25f, 0.25f), 0.15f);
-            _player = new PlayerEntity(MapSizeManager, _ball, new Vector2(2f, 0.2f), 0.5f, 0.2f);
-            _bricksSpawner = new BricksSpawner(EntityManager, MapSizeManager, 2,
-                new Vector2(0.5f, 0.5f), 
-                new Vector2(1.1f, 0.6f),
-                new Vector2(1f, 0.5f));
+            _ball = new BallEntity(settings.BallSize, settings.BallMoveSpeed, settings.MaxDegreesBallBoundingFromPlayer);
+            _player = new PlayerEntity(MapSizeManager, _ball, 
+                settings.PlayerSize, settings.PlayerYOffset, settings.PlayerMoveSpeed, settings.MaxDegreesBallStartFire);
+            _bricksSpawner = new BricksSpawner(EntityManager, MapSizeManager, settings.BrickRowsToSpawn,
+                settings.BricksSpawnOffset, settings.BricksOffset, settings.BricksSize, settings.BricksScore);
         }
 
         public void StartGame()

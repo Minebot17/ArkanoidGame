@@ -7,13 +7,15 @@ namespace ArkanoidModel.Entities
     public class BallEntity : Entity
     {
         private readonly float _moveSpeed;
+        private readonly float _maxDegreesBallBounding;
 
         public Vector2 VelocityDirection { get; set; }
 
-        public BallEntity(Vector2 size, float moveSpeed)
+        public BallEntity(Vector2 size, float moveSpeed, float maxDegreesBallBounding)
         {
             Size = size;
             _moveSpeed = moveSpeed;
+            _maxDegreesBallBounding = maxDegreesBallBounding;
         }
 
         public override void TickUpdate()
@@ -26,7 +28,8 @@ namespace ArkanoidModel.Entities
             if (entity is PlayerEntity player)
             {
                 var relativeDeltaFromCenter = Math.Abs(Position.x - player.Position.x) / (player.Size.x / 2f);
-                var newDegrees = relativeDeltaFromCenter * 60f * (player.Position.x > Position.x ? 1 : -1); // TODO degrees to settings
+                var newDegrees = relativeDeltaFromCenter * _maxDegreesBallBounding 
+                                                         * (player.Position.x > Position.x ? 1 : -1);
                 VelocityDirection = Vector2.up.Rotate(newDegrees);
             }
             else
