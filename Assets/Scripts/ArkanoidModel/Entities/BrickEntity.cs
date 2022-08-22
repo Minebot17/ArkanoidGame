@@ -13,10 +13,7 @@ namespace ArkanoidModel.Entities
             Score = score;
         }
         
-        public override void TickUpdate()
-        {
-            
-        }
+        public override void TickUpdate() { }
 
         public void OnCollideWithBall()
         {

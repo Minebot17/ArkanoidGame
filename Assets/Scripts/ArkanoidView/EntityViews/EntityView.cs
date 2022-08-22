@@ -26,13 +26,14 @@ namespace ArkanoidView.EntityViews
             }
         }
 
-        public T Entity { get; private set; }
+        protected T Entity { get; private set; }
 
         protected virtual void Start()
         {
             _transformEntityMapper = new TransformEntityMapper(transform, EntityModel);
             EntityModel.OnDestroyed += () => Destroy(gameObject);
             transform.position = EntityModel.Position;
+            transform.localScale = new Vector3(EntityModel.Size.x, EntityModel.Size.y, 1);
         }
 
         protected void Update()

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace ArkanoidView.UI
 {
-    public class ScoreView : MonoBehaviour // TODO полностью убрать монобехи с помощью ITickable и IInitializable и переделать модель на зенжект
+    public class ScoreView : MonoBehaviour
     {
         [SerializeField]
         private TextMeshProUGUI _scoreValueText;

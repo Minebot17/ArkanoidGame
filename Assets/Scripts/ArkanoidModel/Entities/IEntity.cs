@@ -9,7 +9,7 @@ namespace ArkanoidModel.Entities
         event Action OnMarkedToDestroy;
         event Action OnDestroyed;
         
-        Vector2 Position { get; set; }
+        Vector2 Position { get; }
         Vector2 Size { get; }
 
         void Destroyed();

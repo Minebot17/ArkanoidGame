@@ -11,8 +11,6 @@ namespace ArkanoidModel.Core
 
         private readonly HashSet<IEntity> _entities = new();
         private readonly HashSet<IEntity> _entitiesToDestroy = new();
-        
-        public IEnumerable<IEntity> Entities => _entities;
 
         public void SpawnEntity(IEntity entity)
         {

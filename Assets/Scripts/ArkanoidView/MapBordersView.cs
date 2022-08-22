@@ -31,11 +31,11 @@ namespace ArkanoidView
             const float colliderDepth = 0.1f;
             var leftCollider = gameObject.AddComponent<BoxCollider2D>();
             leftCollider.size = new Vector2(colliderDepth, _mapSizeManager.MapSize.y);
-            leftCollider.offset = new Vector2(-_mapSizeManager.MapSize.x / 2, 0);
+            leftCollider.offset = new Vector2(-_mapSizeManager.MapSize.x / 2f, 0);
             
             var rightCollider = gameObject.AddComponent<BoxCollider2D>();
             rightCollider.size = new Vector2(colliderDepth, _mapSizeManager.MapSize.y);
-            rightCollider.offset = new Vector2(_mapSizeManager.MapSize.x / 2, 0);
+            rightCollider.offset = new Vector2(_mapSizeManager.MapSize.x / 2f, 0);
             
             var topCollider = gameObject.AddComponent<BoxCollider2D>();
             topCollider.size = new Vector2(_mapSizeManager.MapSize.x, colliderDepth);

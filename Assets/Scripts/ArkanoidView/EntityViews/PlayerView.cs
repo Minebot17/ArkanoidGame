@@ -1,5 +1,4 @@
 ﻿using ArkanoidModel.Entities;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -27,12 +26,6 @@ namespace ArkanoidView.EntityViews
             _controls.Game.Move.started -= HandleMoveAction;
             _controls.Game.Move.canceled -= HandleMoveAction;
             _controls.Game.Fire.performed -= HandleFireAction;
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-            transform.localScale = new Vector3(Entity.Size.x, Entity.Size.y, 1);
         }
 
         private void HandleMoveAction(InputAction.CallbackContext context)

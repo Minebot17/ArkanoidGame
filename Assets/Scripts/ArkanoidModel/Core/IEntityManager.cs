@@ -8,9 +8,7 @@ namespace ArkanoidModel.Core
     {
         event Action<IEntity> OnEntitySpawned;
         event Action<IEntity> OnEntityDestroyed;
-        
-        IEnumerable<IEntity> Entities { get; }
-        
+
         void SpawnEntity(IEntity entity);
         void DestroyEntity(IEntity entity, bool immediate = false);
     }

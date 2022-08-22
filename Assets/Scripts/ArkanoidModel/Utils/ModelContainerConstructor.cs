@@ -20,9 +20,10 @@ namespace ArkanoidModel.Utils
                 settings.BricksOffset, settings.BricksSize, settings.BricksScore);
             
             Container.Bind<BallEntity>().AsSingle().WithArguments(
-                settings.BallSize, settings.BallMoveSpeed, settings.MaxDegreesBallBoundingFromPlayer);
+                settings.BallSize, settings.BallMoveSpeed, 
+                settings.MaxDegreesBallBoundingFromPlayer, settings.MaxDegreesBallStartFire);
             Container.Bind<PlayerEntity>().AsSingle().WithArguments(
-                settings.PlayerSize, settings.PlayerYOffset, settings.PlayerMoveSpeed, settings.MaxDegreesBallStartFire);
+                settings.PlayerSize, settings.PlayerYOffset, settings.PlayerMoveSpeed);
         }
     }
 }
